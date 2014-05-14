@@ -8,6 +8,7 @@ var chalk = require('chalk');
 var NpmModuleGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
+    this.username = 'metaraine';
 
     this.on('end', function () {
       if (!this.options['skip-install']) {
@@ -27,6 +28,10 @@ var NpmModuleGenerator = yeoman.generators.Base.extend({
       name: 'project',
       message: 'project name',
       default: path.basename(this.env.cwd)
+    },{
+      type: 'text',
+      name: 'description',
+      message: 'project description'
     }];
 
     this.prompt(prompts, function (props) {

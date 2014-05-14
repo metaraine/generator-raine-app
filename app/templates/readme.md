@@ -1,39 +1,29 @@
-# <%= this.props.project %> [![Build Status](https://travis-ci.org/sindresorhus/string-length.svg?branch=master)](https://travis-ci.org/sindresorhus/string-length)
+# <%=props.project%> [![Build Status](https://travis-ci.org/<%=username%>/<%=props.project%>.svg?branch=master)](https://travis-ci.org/<%=username%>/<%=props.project%>)
 
-> Get the real length of a string - by correctly counting astral symbols and ignoring [ansi escape codes](https://github.com/sindresorhus/strip-ansi)
-
-`String#length` errornously counts [astral symbols](http://www.tlg.uci.edu/~opoudjis/unicode/unicode_astral.html) as two characters.
+> <%=props.description%>
 
 
 ## Install
 
 ```sh
-$ npm install --save string-length
+$ npm install --save <%=props.project%>
 ```
 
 ```sh
-$ bower install --save string-length
+$ bower install --save <%=props.project%>
 ```
 
 ```sh
-$ component install sindresorhus/string-length
+$ component install <%=username%>/<%=props.project%>
 ```
 
 
 ## Usage
 
 ```js
-'𐌢'.length;
-//=> 2
-
-stringLength('𐌢');
-//=> 1
-
-stringLength('\x1b[1municorn\x1b[22m');
-//=> 7
 ```
 
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [<%=pkg.author.name%>](<%=pkg.author.url%>)
