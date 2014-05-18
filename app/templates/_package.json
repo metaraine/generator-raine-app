@@ -23,6 +23,7 @@
     %>"keywords": <%=props.prettyKeywords%>,
   <%}%>"devDependencies": {
     "mocha": "*",
-    "browserify": "4.x"
+    "insist": "*",
+    "browserify": "^4"
   }
 }
