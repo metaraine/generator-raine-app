@@ -9,14 +9,6 @@
 $ npm install --save <%=props.project%>
 ```
 
-```sh
-$ bower install --save <%=props.project%>
-```
-
-```sh
-$ component install <%=username%>/<%=props.project%>
-```
-
 
 ## Usage
 

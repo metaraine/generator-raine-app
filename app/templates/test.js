@@ -1,9 +1,7 @@
 'use strict';
 var assert = require('assert');
-var stringLength = require('./index');
+var <%=camelize(props.project)%> = require('./index.js');
 
-it('should get the real length of a string', function () {
-	assert.strictEqual(stringLength('𠀔'), 1);
-	assert.strictEqual(stringLength('foo𠁐bar𠀃'), 8);
-	assert.strictEqual(stringLength('\x1b[1mfoo\x1b[22m'), 3);
+it('should do something', function () {
+	assert.equals(true, false);
 });

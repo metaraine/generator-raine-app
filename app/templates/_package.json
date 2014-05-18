@@ -1,42 +1,28 @@
 {
-  "name": "string-length",
-  "version": "0.1.2",
-  "description": "Get the real length of a string - by correctly counting astral symbols and ignoring ansi escape codes",
+  "name": "<%=props.project%>",
+  "version": "0.0.0",
+  "description": "<%=props.description%>",
   "license": "MIT",
-  "repository": "sindresorhus/string-length",
+  "repository": "<%=username%>/<%=props.project%>",
   "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "http://sindresorhus.com"
+    "name": "<%=pkg.author.name%>",
+    "email": "<%=pkg.author.email%>",
+    "url": "<%=pkg.author.url%>"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "./node_modules/mocha/bin/mocha",
     "browser": "browserify -s $npm_package_name -o browser.js ."
   },
   "files": [
     "index.js"
   ],
-  "keywords": [
-    "unicode",
-    "string",
-    "str",
-    "length",
-    "astral",
-    "symbol",
-    "surrogates",
-    "codepoints",
-    "ansi",
-    "escape",
-    "codes"
-  ],
-  "dependencies": {
-    "strip-ansi": "^0.2.1"
-  },
-  "devDependencies": {
+  <%if(props.keywords.length) {
+    %>"keywords": <%=props.prettyKeywords%>,
+  <%}%>"devDependencies": {
     "mocha": "*",
-    "browserify": "^3.0.0"
+    "browserify": "4.x"
   }
 }
