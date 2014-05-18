@@ -67,8 +67,8 @@ var NpmModuleGenerator = yeoman.generators.Base.extend({
     this.copy('_gitattributes', '.gitattributes');
     this.copy('_gitignore', '.gitignore');
     this.copy('_jshintrc', '.jshintrc');
+    this.copy('_travis.yml', '.travis.yml');
     this.copy('_package.json', 'package.json');
-    this.copy('_travis.yml', 'travis.yml');
     this.copy('index.js', 'index.js');
     this.copy('license', 'license');
     this.copy('readme.md', 'readme.md');
