@@ -25,7 +25,7 @@ NpmModuleGenerator = yeoman.generators.Base.extend(
 		done = @async()
 
 		# Have Yeoman greet the user.
-		@log yosay('Welcome to the marvelous NpmModule generator!')
+		@log yosay('Welcome to Raine\'s App Generator')
 		prompts = [
 			{
 				type: 'text'
