@@ -5,6 +5,10 @@ yosay = require 'yosay'
 chalk = require 'chalk'
 compact = require 'lodash.compact'
 camelize = require 'camelize'
+cint = require 'cint'
+nativity = require 'nativity'
+
+nativity.install Function.prototype, cint, ['inContext']
 
 NpmModuleGenerator = yeoman.generators.Base.extend(
 	init: ->
@@ -14,7 +18,8 @@ NpmModuleGenerator = yeoman.generators.Base.extend(
 		@username = 'metaraine'
 		@camelize = camelize
 		@on 'end', ->
-			@installDependencies()	unless @options['skip-install']
+			if !@options['skip-install']
+				@installDependencies()
 
 	askFor: ->
 		done = @async()
@@ -25,18 +30,18 @@ NpmModuleGenerator = yeoman.generators.Base.extend(
 			{
 				type: 'text'
 				name: 'project'
-				message: 'project name'
+				message: 'Project Name'
 				default: path.basename(@env.cwd)
 			}
 			{
 				type: 'text'
 				name: 'description'
-				message: 'project description'
+				message: 'Project Description'
 			}
 			{
 				type: 'text'
 				name: 'keywords'
-				message: 'keywords (comma-separated)'
+				message: 'Keywords (comma-separated)'
 			}
 		]
 
@@ -50,25 +55,20 @@ NpmModuleGenerator = yeoman.generators.Base.extend(
 
 		# assign props to instance for use in templating
 		@prompt prompts, ((props) ->
-			props.keywords = compact(props.keywords.split(',').map((s) ->
-				s.trim()
-			))
+			props.keywords = compact(props.keywords.split(',').map(String.prototype.trim.inContext()))
 			props.prettyKeywords = JSON.stringify(props.keywords).replace(/([[,])/g, '$1\n    ').replace(/]/g, '\n  ]')
 			@props = props
 			done()
 		).bind(this)
 
 	app: ->
-		@copy '_editorconfig', '.editorconfig'
-		@copy '_gitattributes', '.gitattributes'
-		@copy '_gitignore', '.gitignore'
-		@copy '_jshintrc', '.jshintrc'
-		@copy '_travis.yml', '.travis.yml'
-		@copy '_package.json', 'package.json'
-		@copy 'index.js', 'index.js'
-		@copy 'license', 'license'
-		@copy 'readme.md', 'readme.md'
-		@copy 'test.js', 'test.js'
+		this.expandFiles('**', cwd: this.sourceRoot())
+			.map((file)->
+				@copy(file, file
+					.replace('_package.json', 'package.json')
+					.replace(/^_/, '.')
+				)
+			, this)
 )
 
 module.exports = NpmModuleGenerator
