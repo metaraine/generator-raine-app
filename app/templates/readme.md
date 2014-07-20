@@ -8,7 +8,6 @@
 ## Install
 
 ```sh
-$ npm install --save <%=props.project%>
 ```
 
 
@@ -20,4 +19,4 @@ $ npm install --save <%=props.project%>
 
 ## License
 
-MIT © [<%=pkg.author.name%>](<%=pkg.author.url%>)
+ISC © [<%=pkg.author.name%>](<%=pkg.author.url%>)

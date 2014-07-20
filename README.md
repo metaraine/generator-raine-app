@@ -1,4 +1,4 @@
-# generator-npm-module [![Build Status](https://secure.travis-ci.org/metaraine/generator-npm-module.png?branch=master)](https://travis-ci.org/metaraine/generator-npm-module)
+# generator-raine-app [![Build Status](https://secure.travis-ci.org/metaraine/generator-raine-app.png?branch=master)](https://travis-ci.org/metaraine/generator-raine-app)
 
 > [Yeoman](http://yeoman.io) generator
 
@@ -23,16 +23,16 @@ $ npm install -g yo
 
 Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
 
-To install generator-npm-module from npm, run:
+To install generator-raine-app from npm, run:
 
 ```bash
-$ npm install -g generator-npm-module
+$ npm install -g generator-raine-app
 ```
 
 Finally, initiate the generator:
 
 ```bash
-$ yo npm-module
+$ yo raine-app
 ```
 
 ### Getting To Know Yeoman

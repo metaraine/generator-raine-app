@@ -17,6 +17,8 @@ NpmModuleGenerator = yeoman.generators.Base.extend(
 		@pkg = require('../package.json')
 		@username = 'metaraine'
 		@camelize = camelize
+		@port = 3000 + Math.floor(Math.random() * 7000)
+
 		@on 'end', ->
 			if !@options['skip-install']
 				@installDependencies()
