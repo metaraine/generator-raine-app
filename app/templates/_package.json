@@ -2,7 +2,7 @@
   "name": "<%=props.project%>",
   "version": "0.0.0",
   "description": "<%=props.description%>",
-  "license": "MIT",
+  "license": "ISC",
   "repository": "<%=username%>/<%=props.project%>",
   "author": {
     "name": "<%=pkg.author.name%>",
