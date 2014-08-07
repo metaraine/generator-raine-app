@@ -10,7 +10,7 @@
     "url": "<%=pkg.author.url%>"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "0.10.x"
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
