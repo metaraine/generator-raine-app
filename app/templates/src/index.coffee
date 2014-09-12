@@ -7,7 +7,7 @@ app = express()
 app.set 'view engine', 'jade'
 app.set 'views', __dirname + '/views'
 app.use express.static(__dirname + '/public')
-app.use bodyParser()
+app.use bodyParser.urlencoded extended:false
 app.get '/', indexController.index
 
 server = app.listen <%=port%>, ->
