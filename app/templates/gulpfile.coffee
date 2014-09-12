@@ -24,7 +24,7 @@ server = lr()
 config =
 	http_port: <%=port%>
 	dest_app: './app'
-	# livereload_port: '35729'
+	livereload_port: '35729'
 
 	# markup
 	src_views: 'src/views/**/*'
