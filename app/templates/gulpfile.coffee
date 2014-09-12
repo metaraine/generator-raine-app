@@ -45,7 +45,7 @@ config =
 
 	# images
 	src_img: 'src/public/images/**/*.*'
-	dest_img: 'dist/assets/images'
+	dest_img: 'app/public/images'
 
 
 # sass task
