@@ -1,9 +1,9 @@
 # generator-raine-app
->
 
-This is my personal generator for creating new web apps.
+This is my personal generator for creating node web apps. It changes a lot as I experiment and incorporate new technology, so it's not meant to be a stable generator for widespread reuse.
 
-### Stack
+
+### What it includes
 
 - gulp
 	- script concat & min
@@ -14,9 +14,10 @@ This is my personal generator for creating new web apps.
 - SCSS
 
 
-### Directory Structure
+### Directory structure of generated app
 
-- app *Everything gets compiled/copied here*
+- app
+	- *Everything gets compiled/copied here*
 - src
   - controllers
   - public
@@ -26,10 +27,9 @@ This is my personal generator for creating new web apps.
   - views
 
 
-
 ## Usage
 
-It's not on npm, so you'll have to clone and link:
+Install:
 
 ```bash
 $ git clone https://github.com/metaraine/generator-raine-app
