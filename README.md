@@ -1,47 +1,55 @@
-# generator-raine-app [![Build Status](https://secure.travis-ci.org/metaraine/generator-raine-app.png?branch=master)](https://travis-ci.org/metaraine/generator-raine-app)
+# generator-raine-app
+>
 
-> [Yeoman](http://yeoman.io) generator
+This is my personal generator for creating new web apps.
+
+### Stack
+
+- gulp
+	- script concat & min
+  - imagemin
+  - livereload
+- express
+- coffeescript
+- SCSS
 
 
-## Getting Started
+### Directory Structure
 
-### What is Yeoman?
+- app *Everything gets compiled/copied here*
+- src
+  - controllers
+  - public
+    - images
+    - scripts
+    - styles
+  - views
 
-Trick question. It's not a thing. It's this guy:
 
-![](http://i.imgur.com/JHaAlBJ.png)
 
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
+## Usage
 
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+It's not on npm, so you'll have to clone and link:
 
 ```bash
-$ npm install -g yo
+$ git clone https://github.com/metaraine/generator-raine-app
+$ npm link
 ```
 
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-raine-app from npm, run:
-
-```bash
-$ npm install -g generator-raine-app
-```
-
-Finally, initiate the generator:
+Create a new web app like this:
 
 ```bash
 $ yo raine-app
 ```
 
-### Getting To Know Yeoman
+To run the app after it's been generated
 
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+```bash
+$ gulp
+$ node app
+```
 
 
 ## License
 
-MIT
+ISC
