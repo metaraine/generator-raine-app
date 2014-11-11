@@ -17,6 +17,13 @@
 ```
 
 
+## Deploy
+
+```sh
+heroku config:set RELIC_KEY=YOUR_LICENSE_KEY
+```
+
+
 ## License
 
 ISC © [<%=pkg.author.name%>](<%=pkg.author.url%>)
