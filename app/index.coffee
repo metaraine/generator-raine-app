@@ -65,7 +65,7 @@ NpmModuleGenerator = yeoman.generators.Base.extend(
 
 	app: ->
 
-		# go through all the files in the source soot folder (app/templates/src)
+		# go through all the files in the source soot folder (app/templates)
 		this.expandFiles('**', cwd: this.sourceRoot())
 
 			# copy each file (with templating)
