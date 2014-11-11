@@ -8,7 +8,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name : ['APP_NAME'],
+  app_name : ['<%=props.project%>'],
   /**
    * Your New Relic license key.
    */

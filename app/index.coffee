@@ -64,11 +64,15 @@ NpmModuleGenerator = yeoman.generators.Base.extend(
 		).bind(this)
 
 	app: ->
+
+		# go through all the files in the source soot folder (app/templates/src)
 		this.expandFiles('**', cwd: this.sourceRoot())
+
+			# copy each file (with templating)
 			.map((file)->
 				@copy(file, file
-					.replace('_package.json', 'package.json')
-					.replace(/^_/, '.')
+					.replace('_package.json', 'package.json') # rename package.json
+					.replace(/^_/, '.') # replace a starting '_' with '.' in all other files
 				)
 			, this)
 )
