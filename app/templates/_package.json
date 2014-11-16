@@ -15,7 +15,7 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
     "browser": "browserify -s $npm_package_name -o browser.js .",
-    "pingheroku": "heroku info -s | grep web_url | cut -d= -f2 | xargs -I{} http get {} -h | head -1"
+    "pingheroku": "heroku info -s | grep web_url | cut -d= -f2 | xargs -I{} curl {} -w '%{http_code}' -so /dev/null"
   },
   "dependencies": {
     "express": "~4",
