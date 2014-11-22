@@ -19,6 +19,7 @@ embedlr =      require('gulp-embedlr')
 filter =       require('gulp-filter')
 ngAnnotate =   require('gulp-ng-annotate')
 lr =           require('tiny-lr')
+fs = 					 require('fs')
 
 bowerrc = JSON.parse(fs.readFileSync('.bowerrc'))
 server = lr()
@@ -32,7 +33,7 @@ config =
 	dest_views: 'app/views'
 
 	# styles
-	src_sass: 'src/public/styles/**/*.scss'
+	src_sass: 'src/public/styles/**/*.s*ss'
 	dest_css: 'app/public/styles'
 
 	# scripts
@@ -60,7 +61,7 @@ config =
 # sass task
 gulp.task 'styles', ->
 	gulp.src(config.src_sass)
-		.pipe(sass(style: 'expanded'))
+		.pipe(sass(style: 'expanded', sourceComments: 'normal'))
 		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
 		.pipe(gulp.dest(config.dest_css))
 		.pipe(rename(suffix: '.min'))
