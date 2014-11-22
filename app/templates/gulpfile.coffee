@@ -67,7 +67,7 @@ gulp.task 'styles', ->
 		.pipe(rename(suffix: '.min'))
 		.pipe(minifycss())
 		.pipe(gulp.dest(config.dest_css))
-		.pipe livereload(server)
+		.pipe livereload(server, auto:false)
 
 
 # compile client-side coffeescript, concat, & minify js
@@ -80,7 +80,7 @@ gulp.task 'client_scripts', ->
 		.pipe(rename(suffix: '.min'))
 		.pipe(uglify())
 		.pipe(gulp.dest(config.dest_client_scripts))
-		.pipe livereload(server)
+		.pipe livereload(server, auto:false)
 
 # compile server-side coffeescript
 gulp.task 'server_scripts', ->
@@ -90,7 +90,7 @@ gulp.task 'server_scripts', ->
 		# .pipe(jshint())
 		# .pipe(jshint.reporter('default'))
 		.pipe(gulp.dest(config.dest_server_scripts))
-		.pipe livereload(server)
+		.pipe livereload(server, auto:false)
 
 
 # # concat & minify plugins
@@ -118,14 +118,14 @@ gulp.task 'bower', ->
 	gulp.src(config.src_bower)
 		# .pipe(embedlr())
 		.pipe(gulp.dest(config.dest_bower))
-		.pipe livereload(server)
+		.pipe livereload(server, auto:false)
 
 # watch html
 gulp.task 'views', ->
 	gulp.src(config.src_views)
 		# .pipe(embedlr())
 		.pipe(gulp.dest(config.dest_views))
-		.pipe livereload(server)
+		.pipe livereload(server, auto:false)
 
 
 # clean '.dist/'
