@@ -2,25 +2,25 @@
 
 > <%=props.description%>
 
-
 ## Install
 
-```sh
 ```
-
 
 ## Usage
 
 ```js
-```
 
+
+## Development
+```sh
+$ npm run nodemon
+```
 
 ## Deploy
 
 ```sh
 heroku config:set RELIC_KEY=YOUR_LICENSE_KEY
 ```
-
 
 ## License
 

@@ -14,7 +14,8 @@
   },
   "scripts": {
   	"start": "node app/",
-    "test": "./node_modules/mocha/bin/mocha",
+    "nodemon": "nodemon -w src app/",
+    "test": "mocha",
     "browser": "browserify -s $npm_package_name -o browser.js .",
     "pingheroku": "heroku info -s | grep web_url | cut -d= -f2 | xargs -I{} curl {} -w '%{http_code}' -so /dev/null"
   },
@@ -51,6 +52,7 @@
     "gulp-util": "~3",
     "imagemin": "~0.1",
     "run-sequence": "~1",
+    "nodemon": "^1.3.6",
     "tiny-lr": "~0.1",
     "insist": "^0.2.3",
     "mocha": "^2.1.0"
