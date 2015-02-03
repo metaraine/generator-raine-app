@@ -159,7 +159,7 @@ gulp.task 'watch', (callback)->
 	server.listen config.livereloadPort
 	# http.createServer(ecstatic(root: 'dist/')).listen config.httpPort
 
-	gulp.watch([config.srcCss, srcSass], ['styles'])._watcher.on 'all', livereload
+	gulp.watch([config.srcCss, config.srcSass], ['styles'])._watcher.on 'all', livereload
 	# gulp.watch(config.srcPlugins, ['plugins'])._watcher.on 'all', livereload
 	gulp.watch(config.srcClientScripts, ['clientScripts'])._watcher.on 'all', livereload
 	gulp.watch([config.srcAllScripts, '!' + config.srcClientScripts], ['serverScripts'])._watcher.on 'all', livereload
