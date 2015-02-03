@@ -52,7 +52,7 @@
     "imagemin": "~0.1",
     "run-sequence": "~1",
     "tiny-lr": "~0.1",
-    "insist": "*",
-    "mocha": "*"
+    "insist": "^0.2.3",
+    "mocha": "^2.1.0"
   }
 }
