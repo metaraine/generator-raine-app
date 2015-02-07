@@ -15,7 +15,7 @@
   "scripts": {
   	"start": "node app/",
     "nodemon": "nodemon -w src app/",
-    "test": "mocha",
+    "test": "mocha --recursive --compilers coffee:coffee-script/register",
     "browser": "browserify -s $npm_package_name -o browser.js .",
     "pingheroku": "heroku info -s | grep web_url | cut -d= -f2 | xargs -I{} curl {} -w '%{http_code}' -so /dev/null"
   },
@@ -29,6 +29,7 @@
     %>"keywords": <%=props.prettyKeywords%>,
   <%}%>"devDependencies": {
     "browserify": "~6",
+    "chai": "^1.10.0",
     "coffee-script": "~1",
     "gulp": "~3",
     "gulp-autoprefixer": "~2",
