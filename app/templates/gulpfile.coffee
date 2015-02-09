@@ -1,5 +1,7 @@
 gulp =         require('gulp')
 gutil =        require('gulp-util')
+plumber =      require('gulp-plumber')
+notify = 			 require("gulp-notify")
 coffee =       require('gulp-coffee')
 http =         require('http')
 runSequence =  require('run-sequence')
@@ -23,14 +25,14 @@ lr =           require('tiny-lr')
 fs = 					 require('fs')
 
 server = lr()
+notifyOnError = notify.onError("<%= error.message %>")
 
 config =
-	httpPort: <%=port%>
+	httpPort: 9882
 	livereloadPort: '35729'
 
 	# markup
-	srcViews: 'src/views/**/*'
-	destViews: 'app/views'
+	views: 'app/views/**/*'
 
 	# styles
 	srcCss: 'src/public/styles/**/*.css'
@@ -39,26 +41,21 @@ config =
 	cssConcatTarget: 'out.css'
 
 	# scripts
-	srcAllScripts: 'src/**/*.coffee'
+	srcAllJs: 'src/**/*.js'
+	srcAllCoffee: 'src/**/*.coffee'
 	srcClientScripts: 'src/public/**/*.coffee'
 	srcClientExclude: '!public/**/*.coffee'
 	destClientScripts: 'app/public/scripts'
 	jsConcatTarget: 'main.js'
 	destServerScripts: 'app'
 
-	# plugins
-	# srcPlugins: 'src/assets/scripts/plugins/*.js'
-	# destPlugins: 'dist/assets/scripts'
-	# pluginsConcat: 'plugins.js'
-
 	# images
 	srcImg: 'src/public/images/**/*.*'
 	destImg: 'app/public/images'
 
-
 # sass task
 gulp.task 'styles', ->
-	css  = gulp.src(config.srcCss)
+	css = gulp.src(config.srcCss)
 	sass = gulp.src(config.srcSass)
 		.pipe(sass(style: 'expanded', sourceComments: 'normal'))
 
@@ -71,10 +68,10 @@ gulp.task 'styles', ->
 		.pipe(gulp.dest(config.destCss))
 		.pipe livereload(server, auto:false)
 
-
 # compile client-side coffeescript, concat, & minify js
 gulp.task 'clientScripts', ->
 	gulp.src(config.srcClientScripts)
+		.pipe(plumber(errorHandler: notifyOnError))
 		.pipe(coffee().on('error', gutil.log))
 		.pipe(concat(config.jsConcatTarget))
 		.pipe(ngAnnotate())
@@ -86,28 +83,18 @@ gulp.task 'clientScripts', ->
 
 # compile server-side coffeescript
 gulp.task 'serverScripts', ->
-	gulp.src(config.srcAllScripts)
+	js = gulp.src(config.srcAllJs)
 		.pipe(filter(['**/*', config.srcClientExclude]))
+	compiledCoffee = gulp.src(config.srcAllCoffee)
+		.pipe(filter(['**/*', config.srcClientExclude]))
+		.pipe(plumber(errorHandler: notifyOnError))
 		.pipe(coffee().on('error', gutil.log))
 		# .pipe(jshint())
 		# .pipe(jshint.reporter('default'))
+
+	es.merge(js, compiledCoffee)
 		.pipe(gulp.dest(config.destServerScripts))
 		.pipe livereload(server, auto:false)
-
-
-# # concat & minify plugins
-# gulp.task 'plugins', ->
-# 	# ".jshintrc"
-# 	gulp.src(config.srcPlugins)
-# 		.pipe(jshint())
-# 		.pipe(jshint.reporter('default'))
-# 		.pipe(concat(config.pluginsConcat))
-# 		.pipe(gulp.dest(config.destPlugins))
-# 		.pipe(rename(suffix: '.min'))
-# 		.pipe(uglify())
-# 		.pipe(gulp.dest(config.destApp))
-# 		.pipe livereload(server)
-
 
 # minify images
 gulp.task 'images', ->
@@ -115,18 +102,9 @@ gulp.task 'images', ->
 		.pipe(imagemin())
 		.pipe gulp.dest(config.destImg)
 
-# watch html
-gulp.task 'views', ->
-	gulp.src(config.srcViews)
-		# .pipe(embedlr())
-		.pipe(gulp.dest(config.destViews))
-		.pipe livereload(server, auto:false)
-
-
 # clean '.dist/'
 gulp.task 'clean', ->
 	gulp.src([
-		config.destViews,
 		config.destCss,
 		'app/*.js',
 		'app/controllers/*.js',
@@ -134,16 +112,22 @@ gulp.task 'clean', ->
 	], read: false)
 	.pipe clean()
 
-
 # site launcher
 gulp.task 'open', ->
 	gulp.src('app/index.js') # dummy source, but must match a real file to run
 		.pipe open '',
 			url: 'http://localhost:' + config.httpPort
 
+gulp.task 'watch', (callback) ->
+
+	gulp.watch([config.srcCss, config.srcSass], ['styles'])._watcher.on 'all', livereload
+	gulp.watch(config.srcClientScripts, ['clientScripts'])._watcher.on 'all', livereload
+	gulp.watch([config.srcAllJs, config.srcAllCoffee, '!' + config.srcClientScripts], ['serverScripts'])._watcher.on 'all', livereload
+	gulp.watch(config.views)._watcher.on 'all', livereload
+	gulp.watch(config.srcImg, ['images'])._watcher.on 'all', livereload
 
 # default task -- run 'gulp' from cli
-gulp.task 'default', (callback)->
+gulp.task 'default', (callback) ->
 
 	runSequence 'clean', [
 		# 'plugins'
@@ -151,17 +135,7 @@ gulp.task 'default', (callback)->
 		'serverScripts'
 		'styles'
 		'images'
-		'views'
 	], 'watch', callback
 
-gulp.task 'watch', (callback)->
-
 	server.listen config.livereloadPort
-	# http.createServer(ecstatic(root: 'dist/')).listen config.httpPort
 
-	gulp.watch([config.srcCss, config.srcSass], ['styles'])._watcher.on 'all', livereload
-	# gulp.watch(config.srcPlugins, ['plugins'])._watcher.on 'all', livereload
-	gulp.watch(config.srcClientScripts, ['clientScripts'])._watcher.on 'all', livereload
-	gulp.watch([config.srcAllScripts, '!' + config.srcClientScripts], ['serverScripts'])._watcher.on 'all', livereload
-	gulp.watch(config.srcViews, ['views'])._watcher.on 'all', livereload
-	gulp.watch(config.srcImg, ['images'])._watcher.on 'all', livereload
