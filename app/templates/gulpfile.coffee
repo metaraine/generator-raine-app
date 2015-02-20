@@ -102,7 +102,7 @@ gulp.task 'images', ->
 		.pipe(imagemin())
 		.pipe gulp.dest(config.destImg)
 
-# clean '.dist/'
+# clean
 gulp.task 'clean', ->
 	gulp.src([
 		config.destCss,
