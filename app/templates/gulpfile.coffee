@@ -57,7 +57,7 @@ config =
 gulp.task 'styles', ->
 	css = gulp.src(config.srcCss)
 	sass = gulp.src(config.srcSass)
-		.pipe(sass(style: 'expanded', sourceComments: 'normal'))
+		.pipe(sass(indentedSyntax: true))
 
 	es.merge(css, sass)
 		.pipe(concat(config.cssConcatTarget))
