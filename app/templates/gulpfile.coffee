@@ -12,9 +12,8 @@ minifycss =    require('gulp-minify-css')
 jshint =       require('gulp-jshint')
 rename =       require('gulp-rename')
 uglify =       require('gulp-uglify')
-clean =        require('gulp-clean')
 concat =       require('gulp-concat')
-imagemin =     require('gulp-imagemin')
+# imagemin =     require('gulp-imagemin')
 cache =        require('gulp-cache')
 open =         require('gulp-open')
 livereload =   require('gulp-livereload')
@@ -97,20 +96,19 @@ gulp.task 'serverScripts', ->
 		.pipe livereload(server, auto:false)
 
 # minify images
-gulp.task 'images', ->
-	gulp.src(config.srcImg)
-		.pipe(imagemin())
-		.pipe gulp.dest(config.destImg)
+# gulp.task 'images', ->
+# 	gulp.src(config.srcImg)
+# 		.pipe(imagemin())
+# 		.pipe gulp.dest(config.destImg)
 
 # clean
-gulp.task 'clean', ->
-	gulp.src([
+gulp.task 'clean', (cb)->
+	del([
 		config.destCss,
 		'app/*.js',
 		'app/controllers/*.js',
 		'app/public/scripts/*.js'
-	], read: false)
-	.pipe clean()
+	], cb)
 
 # site launcher
 gulp.task 'open', ->
@@ -124,7 +122,7 @@ gulp.task 'watch', (callback) ->
 	gulp.watch(config.srcClientScripts, ['clientScripts'])._watcher.on 'all', livereload
 	gulp.watch([config.srcAllJs, config.srcAllCoffee, '!' + config.srcClientScripts], ['serverScripts'])._watcher.on 'all', livereload
 	gulp.watch(config.views)._watcher.on 'all', livereload
-	gulp.watch(config.srcImg, ['images'])._watcher.on 'all', livereload
+	# gulp.watch(config.srcImg, ['images'])._watcher.on 'all', livereload
 
 # default task -- run 'gulp' from cli
 gulp.task 'default', (callback) ->
@@ -134,7 +132,7 @@ gulp.task 'default', (callback) ->
 		'clientScripts'
 		'serverScripts'
 		'styles'
-		'images'
+		# 'images'
 	], 'watch', callback
 
 	server.listen config.livereloadPort
