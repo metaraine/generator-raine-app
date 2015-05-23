@@ -21,6 +21,7 @@ livereload =   require('gulp-livereload')
 filter =       require('gulp-filter')
 ngAnnotate =   require('gulp-ng-annotate')
 del =   			 require('del')
+nib =   			 require('nib')
 lr =           require('tiny-lr')
 
 server = lr()
