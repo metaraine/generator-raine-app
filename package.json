@@ -27,7 +27,6 @@
     "cint": "^6",
     "coffee-script": "^1",
     "glob": "^4",
-    "cint": "^6",
     "nativity": "^1",
     "yeoman-generator": "^0.17",
     "yosay": "^0.3"

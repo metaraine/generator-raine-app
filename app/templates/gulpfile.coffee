@@ -1,34 +1,34 @@
-gulp =         require('gulp')
-gutil =        require('gulp-util')
-plumber =      require('gulp-plumber')
-notify = 			 require("gulp-notify")
-coffee =       require('gulp-coffee')
-http =         require('http')
-runSequence =  require('run-sequence')
-es =  				 require('event-stream')
-sass =         require('gulp-sass')
-stylus =       require('gulp-stylus')
-autoprefixer = require('gulp-autoprefixer')
-minifycss =    require('gulp-minify-css')
-jshint =       require('gulp-jshint')
-rename =       require('gulp-rename')
-uglify =       require('gulp-uglify')
-concat =       require('gulp-concat')
-# imagemin =     require('gulp-imagemin')
-cache =        require('gulp-cache')
-open =         require('gulp-open')
-livereload =   require('gulp-livereload')
-filter =       require('gulp-filter')
-ngAnnotate =   require('gulp-ng-annotate')
-del =   			 require('del')
-nib =   			 require('nib')
-lr =           require('tiny-lr')
+gulp =         require 'gulp'
+gutil =        require 'gulp-util'
+plumber =      require 'gulp-plumber'
+notify = 			 require 'gulp-notify'
+coffee =       require 'gulp-coffee'
+http =         require 'http'
+runSequence =  require 'run-sequence'
+es =  				 require 'event-stream'
+sass =         require 'gulp-sass'
+stylus =       require 'gulp-stylus'
+nib = 			   require 'nib'
+autoprefixer = require 'gulp-autoprefixer'
+minifycss =    require 'gulp-minify-css'
+jshint =       require 'gulp-jshint'
+rename =       require 'gulp-rename'
+uglify =       require 'gulp-uglify'
+concat =       require 'gulp-concat'
+# imagemin =     require 'gulp-imagemin'
+cache =        require 'gulp-cache'
+livereload =   require 'gulp-livereload'
+filter =       require 'gulp-filter'
+ngAnnotate =   require 'gulp-ng-annotate'
+del =          require 'del'
+open =         require 'open'
+lr =           require 'tiny-lr'
 
 server = lr()
 notifyOnError = notify.onError("<%= error.message %>")
 
 config =
-	httpPort: 9882
+	httpPort: <%=port%>
 	livereloadPort: '35729'
 
 	# markup
@@ -115,13 +115,11 @@ gulp.task 'clean', (cb)->
 
 # site launcher
 gulp.task 'open', ->
-	gulp.src('app/index.js') # dummy source, but must match a real file to run
-		.pipe open '',
-			url: 'http://localhost:' + config.httpPort
+	open 'http://localhost:' + config.httpPort
 
 gulp.task 'watch', (callback) ->
 
-	gulp.watch([config.srcCss, config.srcSass], ['styles'])._watcher.on 'all', livereload
+	gulp.watch([config.srcCss, config.srcSass, config.srcStylus], ['styles'])._watcher.on 'all', livereload
 	gulp.watch(config.srcClientScripts, ['clientScripts'])._watcher.on 'all', livereload
 	gulp.watch([config.srcAllJs, config.srcAllCoffee, '!' + config.srcClientScripts], ['serverScripts'])._watcher.on 'all', livereload
 	gulp.watch(config.views)._watcher.on 'all', livereload
